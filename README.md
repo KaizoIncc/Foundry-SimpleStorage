@@ -1,66 +1,57 @@
-## Foundry
+# Comandos Básicos de Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## 1. Inicialización y Configuración
+- `forge init` → Inicializa un nuevo proyecto Foundry.
+- `forge install <dependencia>` → Instala una dependencia (ej: `forge install OpenZeppelin/openzeppelin-contracts`).
+- `forge update` → Actualiza las dependencias.
 
-Foundry consists of:
+## 2. Compilación
+- `forge build` → Compila los contratos.
+- `forge clean` → Elimina archivos compilados y caché.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## 3. Testing
+- `forge test` → Ejecuta todos los tests.
+- `forge test --match <nombre_test>` → Ejecuta tests específicos (ej: `--match testDeposit`).
+- `forge test -vvv` → Muestra logs detallados (niveles de verbosidad: `-v` a `-vvvv`).
+
+## 4. Despliegue (Deploy)
+- `forge create <contrato>` → Despliega un contrato (ej: `forge create src/MyContract.sol:MyContract`).
+- `forge script <script>` → Ejecuta un script de deploy (ej: `forge script script/Deploy.s.sol`).
+  - Con variables de entorno:  
+    ```bash
+    forge script script/Deploy.s.sol --private-key $PRIV_KEY --rpc-url $RPC_URL
+    ```
+
+## 5. Interacción con Contratos
+- `forge cast` → Para llamadas a contratos desplegados.
+  - Ejemplo:  
+    ```bash
+    cast send <dirección_contrato> "funcion()" --private-key $PRIV_KEY --rpc-url $RPC_URL
+    ```
+
+## 6. Verificación
+- `forge verify-contract <dirección> <contrato> --etherscan-api-key $ETHERSCAN_KEY` → Verifica un contrato en Etherscan.
+
+## 7. Utilidades
+- `forge fmt` → Formatea el código según estándares.
+- `forge inspect <contrato> <propiedad>` → Obtiene metadatos (ej: `forge inspect MyContract abi`).
+
+## 8. Ejecución Local (Anvil)
+- `anvil` → Inicia una blockchain local para testing (similar a Ganache).
+
+---
+
+# Foundry Zk-Sync
+
+## Instalación
+- Para instalarlo tienes que ejecutar este comando (Nota: Funciona en Linux. Windows requieres de WSL):
+    ```bash
+    curl -L https://raw.githubusercontent.com/matter-labs/foundry-zksync/main/install-foundry-zksync | bash
+    ```
+- `foundryup-zksync` → Actualiza y habilita comandos relacionados con Zk-Sync.
+- `foundryup` → Devuelve a foundry vanilla e inhabilita comandos relacionados con Zk-Sync.
 
 ## Documentation
 
 https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+https://foundry-book.zksync.io/getting-started/installation
