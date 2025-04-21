@@ -13,15 +13,16 @@ contract SimpleStorage {
     */
 
     uint256 MyfavoriteNumber; // visibilidad de los datos: public (es como un getter), private, internal (valor predeterminado), external (solo para funciones)
-    
+
     // uint256[] listOfFavoriteNumbers; [] declaración de array dinammico
     // uint256[3] listOfFavoriteNumbers; [] declaración de array statico de tamaño 3
-    struct Person { // Estructura de datos
+    struct Person {
+        // Estructura de datos
         uint256 favoriteNumber;
         string name;
     }
 
-    // Asignar un valor a una variable de tipo Person. 
+    // Asignar un valor a una variable de tipo Person.
     // Para ser mas explícitos, se puede declarar {}: Person({favoriteNumber: 10 , name: "Ana"})
     // Person public Ana = Person(10 , "Ana");
 
@@ -35,10 +36,10 @@ contract SimpleStorage {
 
     // view = No permite actualizar el estado de la BlockChain, sólo la lee (puede leer variables de almacenamiento)
     // pure = No permite actualizar el estado de la BlockChain, sólo la lee (no puede leer variables de almacenamiento)
-    // Ambos modificadores evitan que una función consuma gas cuando es llamada externamente. Sin embargo, 
+    // Ambos modificadores evitan que una función consuma gas cuando es llamada externamente. Sin embargo,
     // si una función sin view ni pure llama a una función que sí tiene view o pure, esta última sí consumirá gas.
 
-    function retrieve() public view returns(uint256) {
+    function retrieve() public view returns (uint256) {
         return MyfavoriteNumber;
     }
 
