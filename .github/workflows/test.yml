@@ -37,7 +37,12 @@ jobs:
           forge build --sizes
         id: build
 
-      - name: Run Forge tests
+      - name: Run Forge tests (if any)
         run: |
-          forge test -vvv
+          if find test -name "*.t.sol" | grep -q .; then
+            forge test -vvv;
+          else
+            echo "No test files found. Skipping tests.";
+          fi
         id: test
+      
